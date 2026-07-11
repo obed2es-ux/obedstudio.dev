@@ -73,26 +73,10 @@ h1 em{font-style:normal;color:var(--ink)}
 
 /* phone mockup */
 .phone-col{display:flex;justify-content:center}
-.phone{width:min(318px,calc(100vw - 44px));background:#1c1713;border-radius:52px;padding:12px;box-shadow:0 30px 60px rgba(40,22,8,.35);position:relative}
+.phone{width:min(300px,calc(100vw - 44px));background:#1c1713;border-radius:52px;padding:12px;box-shadow:0 30px 60px rgba(40,22,8,.35);position:relative}
 .phone::before{content:"";position:absolute;top:24px;left:50%;transform:translateX(-50%);width:106px;height:26px;background:#1c1713;border-radius:16px;z-index:3}
-.screen{background:radial-gradient(120% 80% at 50% 0%,var(--cream-deep),var(--masa) 55%,var(--cream-shadow));border-radius:42px;overflow:hidden;padding:56px 14px 14px;display:flex;flex-direction:column;gap:12px;min-height:620px}
-.scr-greet{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--red);padding:0 4px}
-.scr-sub{font-size:11.5px;font-weight:600;color:var(--ink-soft);padding:0 4px;margin-top:-8px}
-.scr-card{background:var(--card);border-radius:16px;box-shadow:var(--shadow-card);padding:14px}
-.scr-card h4{font-family:var(--serif);font-size:15px;font-weight:700;margin-bottom:10px}
-.macro-row{display:grid;grid-template-columns:64px 1fr 46px;gap:8px;align-items:center;margin-bottom:9px;font-size:11px;font-weight:600}
-.macro-row:last-child{margin-bottom:0}
-.macro-row .val{text-align:right;font-weight:800;font-variant-numeric:tabular-nums}
-.track{height:8px;background:var(--masa);border-radius:999px;overflow:hidden}
-.fill{height:100%;border-radius:999px}
-.meal{display:flex;gap:10px;align-items:center}
-.meal img{width:64px;height:64px;border-radius:12px;object-fit:cover}
-.meal .t{font-family:var(--serif);font-size:14.5px;font-weight:700;line-height:1.15}
-.meal .chips{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap}
-.chip{font-size:9.5px;font-weight:700;padding:3px 8px;border-radius:999px;color:#fff}
-.scr-nav{margin-top:auto;background:var(--cream-2);border-radius:18px;box-shadow:0 -8px 24px rgba(80,52,24,.07);display:flex;justify-content:space-around;align-items:center;padding:10px 6px;font-size:9px;font-weight:700;color:var(--ink-soft)}
-.scr-nav .on{color:var(--red)}
-.scr-nav .plus{width:40px;height:40px;border-radius:999px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:400;box-shadow:var(--shadow-fab);margin-top:-2px}
+.screen{border-radius:42px;overflow:hidden;display:block;line-height:0}
+.screen img{width:100%;display:block}
 @media(max-width:900px){
   .hero-in{grid-template-columns:1fr;gap:52px}
   .hero{padding:48px 0 64px}
@@ -142,8 +126,9 @@ h2{font-family:var(--serif);font-weight:700;font-size:clamp(30px,4vw,42px);line-
 /* mascots */
 .mascots{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .masc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:52px}
-.masc{text-align:center}
-.masc img{width:200px;margin:0 auto;filter:drop-shadow(0 14px 22px rgba(80,52,24,.18));transition:transform .25s ease}
+.masc{text-align:center;display:flex;flex-direction:column;align-items:center}
+.masc .img-box{height:200px;width:100%;display:flex;align-items:flex-end;justify-content:center}
+.masc img{max-height:200px;max-width:100%;width:auto;filter:drop-shadow(0 14px 22px rgba(80,52,24,.18));transition:transform .25s ease}
 .masc:hover img{transform:translateY(-8px) rotate(-2deg)}
 .masc h3{font-family:var(--serif);font-size:22px;font-weight:700;margin-top:18px}
 .masc p{font-size:14px;color:var(--ink-soft);font-weight:500;max-width:24em;margin:6px auto 0}
@@ -233,42 +218,9 @@ footer{padding:56px 0 44px;color:var(--ink-soft);font-size:14px}
       <p class="hero-note"><b>Gratis para empezar</b> · Español e inglés · Próximamente en el App Store</p>
     </div>
     <div class="phone-col">
-      <div class="phone" role="img" aria-label="Vista del tablero de Macro con el progreso de macros del día">
+      <div class="phone" role="img" aria-label="Captura de pantalla real del tablero de Macro con el progreso de macros del día">
         <div class="screen">
-          <div class="scr-greet">¡Buenos días!</div>
-          <div class="scr-sub">Tu progreso de hoy</div>
-          <div class="scr-card">
-            <h4>Hoy</h4>
-            <div class="macro-row"><span>Calorías</span><div class="track"><div class="fill" style="width:64%;background:#BF6030"></div></div><span class="val">1,280</span></div>
-            <div class="macro-row"><span>Proteína</span><div class="track"><div class="fill" style="width:72%;background:#C53A28"></div></div><span class="val">94g</span></div>
-            <div class="macro-row"><span>Carbs</span><div class="track"><div class="fill" style="width:55%;background:#2C7C72"></div></div><span class="val">128g</span></div>
-            <div class="macro-row"><span>Grasa</span><div class="track"><div class="fill" style="width:48%;background:#D08A2A"></div></div><span class="val">42g</span></div>
-          </div>
-          <div class="scr-card meal">
-            <img src="/macro/assets/food-tacos.jpg" alt="">
-            <div>
-              <div class="t">Tacos de bistec</div>
-              <div class="chips">
-                <span class="chip" style="background:#BF6030">520 kcal</span>
-                <span class="chip" style="background:#C53A28">P 34g</span>
-                <span class="chip" style="background:#2C7C72">C 42g</span>
-              </div>
-            </div>
-          </div>
-          <div class="scr-card meal">
-            <img src="/macro/assets/food-bowl.jpg" alt="">
-            <div>
-              <div class="t">Bowl de salmón</div>
-              <div class="chips">
-                <span class="chip" style="background:#BF6030">610 kcal</span>
-                <span class="chip" style="background:#C53A28">P 41g</span>
-                <span class="chip" style="background:#D08A2A">G 24g</span>
-              </div>
-            </div>
-          </div>
-          <div class="scr-nav">
-            <span class="on">Hoy</span><span>Explora</span><span class="plus">+</span><span>Diario</span><span>Perfil</span>
-          </div>
+          <img src="/macro/assets/dashboard-screenshot.jpg" alt="Tablero de Macro mostrando calorías, proteína, grasa y carbohidratos del día, un platillo destacado y la barra de navegación">
         </div>
       </div>
     </div>
@@ -378,17 +330,17 @@ footer{padding:56px 0 44px;color:var(--ink-soft);font-size:14px}
     <p class="sec-lead" style="margin-left:auto;margin-right:auto">Elige a tu compañero. Celebra contigo cuando llegas a tu meta, te anima cuando te desvías y nunca — nunca — te hace sentir mal por un taco.</p>
     <div class="masc-grid">
       <div class="masc">
-        <img src="/macro/assets/mascot-aguacate.png" alt="Aguacate, la mascota aguacate luchador de Macro, celebrando entre papel picado">
+        <div class="img-box"><img src="/macro/assets/mascot-aguacate.png" alt="Aguacate, la mascota aguacate luchador de Macro, celebrando entre papel picado"></div>
         <h3>Aguacate</h3>
         <p>El luchador. Celebra cada proteína completada como si fuera campeonato.</p>
       </div>
       <div class="masc">
-        <img src="/macro/assets/mascot-lechuga.png" alt="Lechuga, la mascota lechuga de Macro">
+        <div class="img-box"><img src="/macro/assets/mascot-lechuga.png" alt="Lechuga, la mascota lechuga de Macro"></div>
         <h3>Lechuga</h3>
         <p>La tranquila. Te recuerda tomar agua y no complicarte la vida.</p>
       </div>
       <div class="masc">
-        <img src="/macro/assets/mascot-perrito.png" alt="Perrito, la mascota perro de Macro, animándote">
+        <div class="img-box"><img src="/macro/assets/mascot-perrito.png" alt="Perrito, la mascota perro de Macro, animándote"></div>
         <h3>Perrito</h3>
         <p>El fiel. Pase lo que pase hoy, mañana te espera moviendo la cola.</p>
       </div>
