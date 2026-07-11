@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Macro — Una foto. Tus macros.</title>
+<meta name="description" content="Macro es el diario de nutrición hecho para la comida real: toma una foto de tu plato y obtén calorías, proteína, carbohidratos y grasas al instante. En español e inglés.">
+<meta property="og:title" content="Macro — Una foto. Tus macros.">
+<meta property="og:description" content="El diario de nutrición hecho para la comida real. Toma una foto y conoce tus macros.">
+<meta property="og:image" content="https://obedstudio.dev/macro/assets/food-tacos.jpg">
+<meta property="og:url" content="https://obedstudio.dev/macro/">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" sizes="64x64" href="/macro/assets/icon-64.png">
+<link rel="apple-touch-icon" href="/macro/assets/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#C53A28; --red-deep:#A82E1E; --green:#3E9B6E; --amber:#D08A2A;
+  --teal:#2C7C72; --azul:#2F6F9E; --terracotta:#BF6030;
+  --cream:#F7F0E2; --card:#FCF8EF; --cream-2:#FBF6EC;
+  --cream-deep:#EFE6D2; --masa:#E7DCC5; --cream-shadow:#DED1B6;
+  --ink:#2E2620; --ink-soft:#9A8C76; --ink-mute:#B7A88F;
+  --line:#E8DDC7; --line-2:#DCCFB4;
+  --shadow-card:0 6px 16px rgba(122,98,52,.10);
+  --shadow-raised:0 8px 20px rgba(122,98,52,.12);
+  --shadow-hero:0 14px 30px rgba(80,52,24,.18);
+  --shadow-fab:0 10px 22px rgba(197,58,40,.42);
+  --serif:'Newsreader',Georgia,serif;
+  --sans:'Hanken Grotesk',-apple-system,'Segoe UI',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);color:var(--ink);
+  background:radial-gradient(120% 80% at 50% 0%,var(--cream-deep) 0%,var(--masa) 55%,var(--cream-shadow) 100%) fixed;
+  -webkit-font-smoothing:antialiased;line-height:1.5;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* ── Nav ── */
+nav{position:sticky;top:0;z-index:50;background:rgba(252,248,239,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;gap:28px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:700;font-size:22px;color:var(--red)}
+.brand img{width:34px;height:34px;border-radius:9px;box-shadow:var(--shadow-card)}
+.nav-links{display:flex;gap:24px;margin-left:auto;font-size:14px;font-weight:600;color:var(--ink-soft)}
+.nav-links a:hover{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;font-weight:700;font-size:16px;padding:14px 30px;transition:transform .15s ease, box-shadow .15s ease;cursor:pointer}
+.btn:active{transform:scale(.97)}
+.btn-red{background:var(--red);color:#fff;box-shadow:var(--shadow-fab)}
+.btn-red:hover{background:var(--red-deep)}
+.btn-outline{border:1.5px solid var(--red);color:var(--red)}
+.btn-outline:hover{background:rgba(197,58,40,.06)}
+.btn-sm{padding:9px 20px;font-size:14px}
+@media(max-width:720px){.nav-links{display:none}}
+
+/* ── Papel picado ── */
+.picado{display:block;width:100%;height:34px}
+
+/* ── Hero ── */
+.hero{padding:64px 0 88px;position:relative;overflow:hidden}
+.hero-in{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(252,247,233,.94);color:#9A6212;font-weight:700;font-size:13px;letter-spacing:.4px;border:1px solid var(--line-2);border-radius:999px;padding:7px 16px;margin-bottom:22px;box-shadow:var(--shadow-card)}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(42px,6vw,68px);line-height:1.04;color:var(--red)}
+h1 em{font-style:normal;color:var(--ink)}
+.hero p.lead{font-size:19px;color:var(--ink);opacity:.85;margin:22px 0 30px;max-width:32em;line-height:1.55}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.hero-note{margin-top:18px;font-size:13.5px;font-weight:600;color:var(--ink-soft)}
+.hero-note b{color:var(--green)}
+
+/* phone mockup */
+.phone-col{display:flex;justify-content:center}
+.phone{width:min(318px,calc(100vw - 44px));background:#1c1713;border-radius:52px;padding:12px;box-shadow:0 30px 60px rgba(40,22,8,.35);position:relative}
+.phone::before{content:"";position:absolute;top:24px;left:50%;transform:translateX(-50%);width:106px;height:26px;background:#1c1713;border-radius:16px;z-index:3}
+.screen{background:radial-gradient(120% 80% at 50% 0%,var(--cream-deep),var(--masa) 55%,var(--cream-shadow));border-radius:42px;overflow:hidden;padding:56px 14px 14px;display:flex;flex-direction:column;gap:12px;min-height:620px}
+.scr-greet{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--red);padding:0 4px}
+.scr-sub{font-size:11.5px;font-weight:600;color:var(--ink-soft);padding:0 4px;margin-top:-8px}
+.scr-card{background:var(--card);border-radius:16px;box-shadow:var(--shadow-card);padding:14px}
+.scr-card h4{font-family:var(--serif);font-size:15px;font-weight:700;margin-bottom:10px}
+.macro-row{display:grid;grid-template-columns:64px 1fr 46px;gap:8px;align-items:center;margin-bottom:9px;font-size:11px;font-weight:600}
+.macro-row:last-child{margin-bottom:0}
+.macro-row .val{text-align:right;font-weight:800;font-variant-numeric:tabular-nums}
+.track{height:8px;background:var(--masa);border-radius:999px;overflow:hidden}
+.fill{height:100%;border-radius:999px}
+.meal{display:flex;gap:10px;align-items:center}
+.meal img{width:64px;height:64px;border-radius:12px;object-fit:cover}
+.meal .t{font-family:var(--serif);font-size:14.5px;font-weight:700;line-height:1.15}
+.meal .chips{display:flex;gap:5px;margin-top:6px;flex-wrap:wrap}
+.chip{font-size:9.5px;font-weight:700;padding:3px 8px;border-radius:999px;color:#fff}
+.scr-nav{margin-top:auto;background:var(--cream-2);border-radius:18px;box-shadow:0 -8px 24px rgba(80,52,24,.07);display:flex;justify-content:space-around;align-items:center;padding:10px 6px;font-size:9px;font-weight:700;color:var(--ink-soft)}
+.scr-nav .on{color:var(--red)}
+.scr-nav .plus{width:40px;height:40px;border-radius:999px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:400;box-shadow:var(--shadow-fab);margin-top:-2px}
+@media(max-width:900px){
+  .hero-in{grid-template-columns:1fr;gap:52px}
+  .hero{padding:48px 0 64px}
+}
+
+/* ── Sections ── */
+section{padding:84px 0}
+.sec-eyebrow{font-size:13px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--terracotta);margin-bottom:12px}
+h2{font-family:var(--serif);font-weight:700;font-size:clamp(30px,4vw,42px);line-height:1.1;max-width:18em}
+.sec-lead{font-size:17px;color:var(--ink-soft);font-weight:500;margin-top:14px;max-width:36em}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+.step{background:var(--card);border-radius:22px;box-shadow:var(--shadow-card);padding:28px;position:relative}
+.step .num{font-family:var(--serif);font-size:44px;font-weight:700;color:var(--masa);position:absolute;top:18px;right:24px;line-height:1}
+.step .ic{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.step h3{font-family:var(--serif);font-size:21px;font-weight:700;margin-bottom:8px}
+.step p{font-size:14.5px;color:var(--ink-soft);font-weight:500}
+@media(max-width:820px){.steps{grid-template-columns:1fr}}
+
+/* showcase */
+.show{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:12px}
+.show-img{position:relative}
+.show-img>img{border-radius:24px;box-shadow:var(--shadow-hero);aspect-ratio:1;object-fit:cover}
+.float-chip{position:absolute;background:var(--card);border:1px solid var(--line-2);border-radius:999px;padding:9px 16px;font-size:13px;font-weight:800;box-shadow:var(--shadow-raised);display:flex;align-items:center;gap:8px;animation:bob 4s ease-in-out infinite}
+.float-chip .dot{width:9px;height:9px;border-radius:999px}
+.fc1{top:8%;left:-26px;animation-delay:0s}
+.fc2{top:38%;right:-30px;animation-delay:1.2s}
+.fc3{bottom:20%;left:-18px;animation-delay:2.1s}
+.fc4{bottom:-16px;right:12%;animation-delay:.6s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.show ul{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:16px}
+.show li{display:flex;gap:13px;font-size:15.5px;font-weight:500;color:var(--ink)}
+.show li .tick{flex:none;width:24px;height:24px;border-radius:999px;background:rgba(62,155,110,.14);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-top:1px}
+@media(max-width:900px){.show{grid-template-columns:1fr;gap:60px}.fc1{left:6px}.fc3{left:10px}.fc2{right:6px}}
+
+/* features grid */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+.feat{background:var(--card);border-radius:16px;box-shadow:var(--shadow-card);padding:26px;transition:transform .2s ease,box-shadow .2s ease}
+.feat:hover{transform:translateY(-4px);box-shadow:var(--shadow-raised)}
+.feat .ic{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.feat h3{font-family:var(--serif);font-size:19px;font-weight:700;margin-bottom:7px}
+.feat p{font-size:14px;color:var(--ink-soft);font-weight:500}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.grid{grid-template-columns:1fr}}
+
+/* mascots */
+.mascots{background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.masc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:52px}
+.masc{text-align:center}
+.masc img{width:200px;margin:0 auto;filter:drop-shadow(0 14px 22px rgba(80,52,24,.18));transition:transform .25s ease}
+.masc:hover img{transform:translateY(-8px) rotate(-2deg)}
+.masc h3{font-family:var(--serif);font-size:22px;font-weight:700;margin-top:18px}
+.masc p{font-size:14px;color:var(--ink-soft);font-weight:500;max-width:24em;margin:6px auto 0}
+@media(max-width:820px){.masc-grid{grid-template-columns:1fr;gap:44px}}
+
+/* pricing */
+.plans{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-top:48px;align-items:stretch}
+.plan{background:var(--card);border-radius:22px;box-shadow:var(--shadow-card);padding:30px;display:flex;flex-direction:column}
+.plan.hot{border:2px solid var(--red);box-shadow:var(--shadow-hero);position:relative}
+.plan .tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.6px;padding:5px 14px;border-radius:999px;white-space:nowrap}
+.plan h3{font-family:var(--serif);font-size:21px;font-weight:700}
+.price{font-size:38px;font-weight:800;margin:14px 0 2px;font-variant-numeric:tabular-nums}
+.price small{font-size:15px;font-weight:600;color:var(--ink-soft)}
+.per{font-size:13px;color:var(--ink-soft);font-weight:600;margin-bottom:20px}
+.plan ul{list-style:none;display:flex;flex-direction:column;gap:11px;font-size:14px;font-weight:500;margin-bottom:26px}
+.plan li{display:flex;gap:10px}
+.plan li::before{content:"✓";color:var(--green);font-weight:800}
+.plan li.no{color:var(--ink-mute)}
+.plan li.no::before{content:"—";color:var(--ink-mute)}
+.plan .btn{margin-top:auto}
+@media(max-width:900px){.plans{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}}
+
+/* final cta */
+.cta-band{background:linear-gradient(135deg,var(--red) 0%,var(--red-deep) 100%);border-radius:28px;padding:64px 48px;text-align:center;color:#fff;box-shadow:var(--shadow-hero);position:relative;overflow:hidden}
+.cta-band h2{color:#fff;margin:0 auto 14px;max-width:14em}
+.cta-band p{opacity:.85;font-size:16.5px;max-width:34em;margin:0 auto 32px}
+.btn-cream{background:var(--cream-2);color:var(--red);box-shadow:0 10px 24px rgba(40,22,8,.3)}
+.btn-cream:hover{background:#fff}
+.cta-band .mini{margin-top:18px;font-size:13px;opacity:.75;font-weight:600}
+
+/* footer */
+footer{padding:56px 0 44px;color:var(--ink-soft);font-size:14px}
+.foot-in{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.foot-in .brand{font-size:18px}
+.foot-in .brand img{width:26px;height:26px}
+.foot-links{display:flex;gap:22px;margin-left:auto;font-weight:600;flex-wrap:wrap}
+.foot-links a:hover{color:var(--ink)}
+.foot-legal{margin-top:22px;font-size:12.5px;color:var(--ink-mute);max-width:52em}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="brand" href="/macro/"><img src="/macro/assets/icon-180.png" alt="Macro">Macro</a>
+    <div class="nav-links">
+      <a href="#como">Cómo funciona</a>
+      <a href="#funciones">Funciones</a>
+      <a href="#equipo">Tu equipo</a>
+      <a href="#premium">Premium</a>
+    </div>
+    <a class="btn btn-red btn-sm" href="https://testflight.apple.com/join/MycuTK1V">Probar gratis</a>
+  </div>
+</nav>
+
+<!-- papel picado -->
+<svg class="picado" viewBox="0 0 1200 34" preserveAspectRatio="none" aria-hidden="true">
+  <line x1="0" y1="1" x2="1200" y2="1" stroke="#DCCFB4" stroke-width="2"/>
+  <g>
+    <!-- weave: red · green · amber · teal · azul -->
+    <path d="M10 2h44v20l-6 5 6 5-8-2-6 4-8-4-8 4-6-4-8 2 6-5-6-5z" fill="#C53A28"/>
+    <path d="M130 2h44v20l-6 5 6 5-8-2-6 4-8-4-8 4-6-4-8 2 6-5-6-5z" fill="#3E9B6E"/>
+    <path d="M250 2h44v20l-6 5 6 5-8-2-6 4-8-4-8 4-6-4-8 2 6-5-6-5z" fill="#D08A2A"/>
+    <path d="M370 2h44v20l-6 5 6 5-8-2-6 4-8-4-8 4-6-4-8 2 6-5-6-5z" fill="#2C7C72"/>
+    <path d="M490 2h44v20l-6 5 6 5-8-2-6 4-8-4-8 4-6-4-8 2 6-5-6-5z" fill="#2F6F9E"/>
+    <path d="M610 2h44v20l-6 5 6 5-8-2-6 4-8-4-8 4-6-4-8 2 6-5-6-5z" fill="#C53A28"/>
+    <path d="M730 2h44v20l-6 5 6 5-8-2-6 4-8-4-8 4-6-4-8 2 6-5-6-5z" fill="#3E9B6E"/>
+    <path d="M850 2h44v20l-6 5 6 5-8-2-6 4-8-4-8 4-6-4-8 2 6-5-6-5z" fill="#D08A2A"/>
+    <path d="M970 2h44v20l-6 5 6 5-8-2-6 4-8-4-8 4-6-4-8 2 6-5-6-5z" fill="#2C7C72"/>
+    <path d="M1090 2h44v20l-6 5 6 5-8-2-6 4-8-4-8 4-6-4-8 2 6-5-6-5z" fill="#2F6F9E"/>
+    <g fill="#F7F0E2" opacity=".85">
+      <circle cx="32" cy="12" r="4"/><circle cx="152" cy="12" r="4"/><circle cx="272" cy="12" r="4"/><circle cx="392" cy="12" r="4"/><circle cx="512" cy="12" r="4"/><circle cx="632" cy="12" r="4"/><circle cx="752" cy="12" r="4"/><circle cx="872" cy="12" r="4"/><circle cx="992" cy="12" r="4"/><circle cx="1112" cy="12" r="4"/>
+    </g>
+  </g>
+</svg>
+
+<header class="hero">
+  <div class="wrap hero-in">
+    <div>
+      <span class="eyebrow">🌮 Hecho para la comida real</span>
+      <h1>Una foto.<br><em>Tus macros.</em></h1>
+      <p class="lead">Macro es el diario de nutrición hecho para tacos, bowls, antojitos y comida casera — todo lo que no cabe en una etiqueta perfecta. Toma una foto de tu plato y conoce sus calorías, proteína, carbohidratos y grasas.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-red" href="https://testflight.apple.com/join/MycuTK1V">Únete a la beta en TestFlight</a>
+        <a class="btn btn-outline" href="#como">Ver cómo funciona</a>
+      </div>
+      <p class="hero-note"><b>Gratis para empezar</b> · Español e inglés · Próximamente en el App Store</p>
+    </div>
+    <div class="phone-col">
+      <div class="phone" role="img" aria-label="Vista del tablero de Macro con el progreso de macros del día">
+        <div class="screen">
+          <div class="scr-greet">¡Buenos días!</div>
+          <div class="scr-sub">Tu progreso de hoy</div>
+          <div class="scr-card">
+            <h4>Hoy</h4>
+            <div class="macro-row"><span>Calorías</span><div class="track"><div class="fill" style="width:64%;background:#BF6030"></div></div><span class="val">1,280</span></div>
+            <div class="macro-row"><span>Proteína</span><div class="track"><div class="fill" style="width:72%;background:#C53A28"></div></div><span class="val">94g</span></div>
+            <div class="macro-row"><span>Carbs</span><div class="track"><div class="fill" style="width:55%;background:#2C7C72"></div></div><span class="val">128g</span></div>
+            <div class="macro-row"><span>Grasa</span><div class="track"><div class="fill" style="width:48%;background:#D08A2A"></div></div><span class="val">42g</span></div>
+          </div>
+          <div class="scr-card meal">
+            <img src="/macro/assets/food-tacos.jpg" alt="">
+            <div>
+              <div class="t">Tacos de bistec</div>
+              <div class="chips">
+                <span class="chip" style="background:#BF6030">520 kcal</span>
+                <span class="chip" style="background:#C53A28">P 34g</span>
+                <span class="chip" style="background:#2C7C72">C 42g</span>
+              </div>
+            </div>
+          </div>
+          <div class="scr-card meal">
+            <img src="/macro/assets/food-bowl.jpg" alt="">
+            <div>
+              <div class="t">Bowl de salmón</div>
+              <div class="chips">
+                <span class="chip" style="background:#BF6030">610 kcal</span>
+                <span class="chip" style="background:#C53A28">P 41g</span>
+                <span class="chip" style="background:#D08A2A">G 24g</span>
+              </div>
+            </div>
+          </div>
+          <div class="scr-nav">
+            <span class="on">Hoy</span><span>Explora</span><span class="plus">+</span><span>Diario</span><span>Perfil</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="como">
+  <div class="wrap">
+    <div class="sec-eyebrow">Cómo funciona</div>
+    <h2>Menos hoja de cálculo, más comer con intención</h2>
+    <p class="sec-lead">Registrar una comida toma segundos, no minutos. Sin buscar en listas interminables ni adivinar porciones genéricas.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="num">1</span>
+        <div class="ic" style="background:rgba(197,58,40,.12)">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C53A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        </div>
+        <h3>Toma una foto</h3>
+        <p>Apunta la cámara a tu plato. Macro reconoce el platillo — está entrenado para comidas completas, porciones variables y platillos mexicanos que otras apps tratan como genéricos.</p>
+      </div>
+      <div class="step">
+        <span class="num">2</span>
+        <div class="ic" style="background:rgba(208,138,42,.14)">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#D08A2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>Confirma y ajusta</h3>
+        <p>Revisa los ingredientes detectados, ajusta la porción con un toque y confirma. Tú siempre tienes la última palabra sobre tu plato.</p>
+      </div>
+      <div class="step">
+        <span class="num">3</span>
+        <div class="ic" style="background:rgba(62,155,110,.14)">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3E9B6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <h3>Mira tu progreso</h3>
+        <p>Calorías, proteína, grasa y carbohidratos del día, junto a tus metas personales. Historial, racha, agua y consejos que sí te ayudan a decidir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap show">
+    <div class="show-img">
+      <img src="/macro/assets/food-tacos.jpg" alt="Tacos de bistec con salsa verde en un plato de barro">
+      <div class="float-chip fc1"><span class="dot" style="background:#BF6030"></span>520 kcal</div>
+      <div class="float-chip fc2"><span class="dot" style="background:#C53A28"></span>Proteína 34g</div>
+      <div class="float-chip fc3"><span class="dot" style="background:#2C7C72"></span>Carbs 42g</div>
+      <div class="float-chip fc4"><span class="dot" style="background:#D08A2A"></span>Grasa 18g</div>
+    </div>
+    <div>
+      <div class="sec-eyebrow">Foto a macros</div>
+      <h2>Diseñado para el plato que tienes enfrente</h2>
+      <p class="sec-lead">No todo viene con código de barras. Macro estima los macros de comida casera, de restaurante y de la calle para que decidas mejor sin convertir cada comida en una tarea.</p>
+      <ul>
+        <li><span class="tick">✓</span>Desglose claro por ingrediente, con porciones que puedes ajustar</li>
+        <li><span class="tick">✓</span>Registra también por texto, voz o escaneando un código de barras</li>
+        <li><span class="tick">✓</span>Guarda tus platillos frecuentes y regístralos en un toque</li>
+        <li><span class="tick">✓</span>Todo en español e inglés, como tú hables</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="funciones" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-eyebrow">Funciones</div>
+    <h2>Todo tu día de comida, en un solo lugar</h2>
+    <div class="grid">
+      <div class="feat">
+        <div class="ic" style="background:rgba(197,58,40,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C53A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        <h3>Foto a macros</h3>
+        <p>Apunta, confirma y listo. Un desglose claro de calorías y macros para comidas completas, no genéricas.</p>
+      </div>
+      <div class="feat">
+        <div class="ic" style="background:rgba(44,124,114,.13)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2C7C72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        <h3>Registro sin fricción</h3>
+        <p>Cada comida con su foto, tipo y datos nutricionales. Tu avance del día siempre a la vista.</p>
+      </div>
+      <div class="feat">
+        <div class="ic" style="background:rgba(62,155,110,.14)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3E9B6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <h3>Metas personalizadas</h3>
+        <p>Tu perfil, objetivo y actividad definen metas que se ajustan a tu rutina — no al revés.</p>
+      </div>
+      <div class="feat">
+        <div class="ic" style="background:rgba(208,138,42,.14)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D08A2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+        <h3>Planea antes de comer</h3>
+        <p>Explora platillos y revisa cómo encajan en tus macros antes de registrarlos. Menos adivinanzas, más intención.</p>
+      </div>
+      <div class="feat">
+        <div class="ic" style="background:rgba(47,111,158,.13)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2F6F9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5v14"/><path d="M8 5v14"/><path d="M12 5v14"/><path d="M17 5v14"/><path d="M21 5v14"/></svg></div>
+        <h3>Escáner de productos</h3>
+        <p>¿Algo empacado? Escanea el código de barras o la etiqueta nutricional y regístralo con contexto.</p>
+      </div>
+      <div class="feat">
+        <div class="ic" style="background:rgba(191,96,48,.14)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#BF6030" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
+        <h3>Historial, racha y consejos</h3>
+        <p>Consulta tu historial, mantén tu racha, registra agua y recibe consejos basados en tu progreso real.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="equipo" class="mascots">
+  <div class="wrap" style="text-align:center">
+    <div class="sec-eyebrow">Tu equipo</div>
+    <h2 style="margin:0 auto">Un equipo que te echa porras</h2>
+    <p class="sec-lead" style="margin-left:auto;margin-right:auto">Elige a tu compañero. Celebra contigo cuando llegas a tu meta, te anima cuando te desvías y nunca — nunca — te hace sentir mal por un taco.</p>
+    <div class="masc-grid">
+      <div class="masc">
+        <img src="/macro/assets/mascot-aguacate.png" alt="Aguacate, la mascota aguacate luchador de Macro, celebrando entre papel picado">
+        <h3>Aguacate</h3>
+        <p>El luchador. Celebra cada proteína completada como si fuera campeonato.</p>
+      </div>
+      <div class="masc">
+        <img src="/macro/assets/mascot-lechuga.png" alt="Lechuga, la mascota lechuga de Macro">
+        <h3>Lechuga</h3>
+        <p>La tranquila. Te recuerda tomar agua y no complicarte la vida.</p>
+      </div>
+      <div class="masc">
+        <img src="/macro/assets/mascot-perrito.png" alt="Perrito, la mascota perro de Macro, animándote">
+        <h3>Perrito</h3>
+        <p>El fiel. Pase lo que pase hoy, mañana te espera moviendo la cola.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="premium">
+  <div class="wrap">
+    <div class="sec-eyebrow">Premium</div>
+    <h2>Empieza gratis. Sube de nivel cuando quieras.</h2>
+    <p class="sec-lead">Lo esencial — foto, escáner y tu diario — es gratis. Premium agrega profundidad: voz, análisis más precisos y planeación avanzada.</p>
+    <div class="plans">
+      <div class="plan">
+        <h3>Gratis</h3>
+        <div class="price">$0</div>
+        <div class="per">para siempre</div>
+        <ul>
+          <li>Registro por foto y texto</li>
+          <li>Escáner de código de barras</li>
+          <li>Diario, racha y agua</li>
+          <li>Metas personalizadas</li>
+          <li>Mascotas incluidas</li>
+          <li class="no">Registro por voz</li>
+          <li class="no">Análisis con IA más profunda</li>
+        </ul>
+        <a class="btn btn-outline" href="https://testflight.apple.com/join/MycuTK1V">Empezar gratis</a>
+      </div>
+      <div class="plan hot">
+        <span class="tag">7 DÍAS DE PRUEBA</span>
+        <h3>Premium anual</h3>
+        <div class="price">$599 <small>MXN</small></div>
+        <div class="per">al año — como $50 al mes</div>
+        <ul>
+          <li>Todo lo del plan gratis</li>
+          <li>Registro por voz</li>
+          <li>Análisis de foto con IA más profunda</li>
+          <li>Planeación avanzada de comidas</li>
+          <li>Historial completo</li>
+        </ul>
+        <a class="btn btn-red" href="https://testflight.apple.com/join/MycuTK1V">Probar 7 días gratis</a>
+      </div>
+      <div class="plan">
+        <h3>Premium mensual</h3>
+        <div class="price">$99 <small>MXN</small></div>
+        <div class="per">al mes</div>
+        <ul>
+          <li>Todo lo del plan gratis</li>
+          <li>Registro por voz</li>
+          <li>Análisis de foto con IA más profunda</li>
+          <li>Planeación avanzada de comidas</li>
+          <li>Cancela cuando quieras</li>
+        </ul>
+        <a class="btn btn-outline" href="https://testflight.apple.com/join/MycuTK1V">Probar 7 días gratis</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:20px">
+  <div class="wrap">
+    <div class="cta-band">
+      <h2>Mejores decisiones en cada comida</h2>
+      <p>Únete a la beta hoy y prueba Macro antes que nadie. Tu retroalimentación le da forma a la app.</p>
+      <a class="btn btn-cream" href="https://testflight.apple.com/join/MycuTK1V">Únete a la beta en TestFlight</a>
+      <div class="mini">Requiere iPhone con iOS 16 o superior · Muy pronto en el App Store</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <a class="brand" href="/macro/"><img src="/macro/assets/icon-180.png" alt="">Macro</a>
+      <div class="foot-links">
+        <a href="/macro/support/">Soporte</a>
+        <a href="/privacy/">Privacidad</a>
+        <a href="/terms/">Términos</a>
+        <a href="https://testflight.apple.com/join/MycuTK1V">TestFlight</a>
+      </div>
+    </div>
+    <p class="foot-legal">© 2026 Obed Studio. Macro no reemplaza el consejo de un profesional de salud. Las estimaciones nutricionales pueden variar según ingredientes, porciones y preparación, pero te dan una base práctica para comer con más conciencia.</p>
+  </div>
+</footer>
+
+</body>
+</html>
