@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Macro — Una foto. Tus macros.</title>
-<meta name="description" content="Macro es el diario de nutrición hecho para la comida real: toma una foto de tu plato y obtén calorías, proteína, carbohidratos y grasas al instante. En español e inglés.">
+<meta name="description" content="El diario de nutrición hecho para la comida real: foto, código de barras, voz o texto. Calorías y macros de tacos, guisados y todo lo que sí comes. Gratis en el App Store.">
 <meta property="og:title" content="Macro — Una foto. Tus macros.">
-<meta property="og:description" content="El diario de nutrición hecho para la comida real. Toma una foto y conoce tus macros.">
+<meta property="og:description" content="Registra por foto, código de barras, voz o texto. Macros de la comida que sí comes — en segundos, en español.">
 <meta property="og:image" content="https://obedstudio.dev/macro/assets/food-tacos.jpg">
 <meta property="og:url" content="https://obedstudio.dev/macro/">
 <meta property="og:type" content="website">
@@ -70,6 +70,11 @@ h1 em{font-style:normal;color:var(--ink)}
 .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .hero-note{margin-top:18px;font-size:13.5px;font-weight:600;color:var(--ink-soft)}
 .hero-note b{color:var(--green)}
+/* the 4 logging modes, visible from second one */
+.mode-strip{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.mode-pill{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line-2);border-radius:999px;padding:8px 15px;font-size:13.5px;font-weight:700;color:var(--ink);box-shadow:var(--shadow-card)}
+.mode-pill .em{font-size:15px}
+.mode-pill .tagg{font-size:10.5px;font-weight:800;letter-spacing:.4px;color:var(--green);background:rgba(62,155,110,.13);border-radius:999px;padding:2px 8px}
 
 /* phone mockup */
 .phone-col{display:flex;justify-content:center}
@@ -81,6 +86,12 @@ h1 em{font-style:normal;color:var(--ink)}
   .hero-in{grid-template-columns:1fr;gap:52px}
   .hero{padding:48px 0 64px}
 }
+
+/* ── trust band ── */
+.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--card)}
+.trust .wrap{display:flex;gap:12px 40px;align-items:center;justify-content:center;flex-wrap:wrap;padding-top:20px;padding-bottom:20px}
+.trust span{font-size:13.5px;font-weight:700;color:var(--ink-soft);display:inline-flex;align-items:center;gap:8px}
+.trust .em{font-size:16px}
 
 /* ── Sections ── */
 section{padding:84px 0}
@@ -96,6 +107,44 @@ h2{font-family:var(--serif);font-weight:700;font-size:clamp(30px,4vw,42px);line-
 .step h3{font-family:var(--serif);font-size:21px;font-weight:700;margin-bottom:8px}
 .step p{font-size:14.5px;color:var(--ink-soft);font-weight:500}
 @media(max-width:820px){.steps{grid-template-columns:1fr}}
+
+/* ── logging-modes tabs ── */
+.modes-box{margin-top:46px;background:var(--card);border-radius:26px;box-shadow:var(--shadow-raised);overflow:hidden}
+.modes-tabs{display:flex;border-bottom:1px solid var(--line);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.modes-tabs::-webkit-scrollbar{display:none}
+.modes-tabs button{flex:1;min-width:130px;border:none;background:transparent;font-family:var(--sans);font-size:14.5px;font-weight:700;color:var(--ink-soft);padding:18px 14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;border-bottom:3px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap}
+.modes-tabs button .em{font-size:18px}
+.modes-tabs button[aria-selected="true"]{color:var(--red);border-bottom-color:var(--red);background:rgba(197,58,40,.04)}
+.mode-panel{display:none;padding:38px 40px;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center}
+.mode-panel.active{display:grid}
+.mode-panel h3{font-family:var(--serif);font-size:clamp(22px,3vw,30px);font-weight:700;line-height:1.15}
+.mode-panel .kicker{display:inline-flex;gap:8px;align-items:center;font-size:11.5px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;border-radius:999px;padding:4px 12px;margin-bottom:14px}
+.kicker.free{background:rgba(62,155,110,.13);color:var(--green)}
+.kicker.prem{background:rgba(197,58,40,.1);color:var(--red)}
+.mode-panel p{font-size:15.5px;color:var(--ink-soft);font-weight:500;margin-top:12px;max-width:34em}
+.mode-panel .mini-list{margin-top:18px;display:flex;flex-direction:column;gap:10px;list-style:none}
+.mode-panel .mini-list li{display:flex;gap:10px;font-size:14.5px;font-weight:600}
+.mode-panel .mini-list .tick{color:var(--green);font-weight:800}
+/* mode visuals: chat-like demo chips */
+.mode-visual{background:var(--cream-2);border:1px solid var(--line);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:12px;min-height:230px;justify-content:center}
+.demo-chip{background:#fff;border:1px solid var(--line-2);border-radius:16px;padding:12px 16px;font-size:14px;font-weight:600;box-shadow:var(--shadow-card);display:flex;align-items:center;gap:10px;animation:rise .5s ease both}
+.demo-chip.user{align-self:flex-end;background:var(--red);color:#fff;border-color:var(--red-deep)}
+.demo-chip:nth-child(2){animation-delay:.15s}
+.demo-chip:nth-child(3){animation-delay:.3s}
+.demo-chip .macros{display:flex;gap:8px;font-size:12px;font-weight:800}
+.demo-chip .macros span{border-radius:999px;padding:2px 9px}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+/* CSS barcode */
+.barcode-demo{align-items:center}
+.barcode-lines{width:200px;height:84px;border-radius:10px;background:repeating-linear-gradient(90deg,#2E2620 0 3px,transparent 3px 6px,#2E2620 6px 8px,transparent 8px 13px,#2E2620 13px 15px,transparent 15px 17px);position:relative;overflow:hidden}
+.barcode-lines::after{content:"";position:absolute;inset:-8px 0;width:3px;background:var(--red);box-shadow:0 0 12px 3px rgba(197,58,40,.55);animation:scanline 2.2s ease-in-out infinite}
+@keyframes scanline{0%,100%{left:8%}50%{left:90%}}
+/* voice bars */
+.voice-bars{display:flex;gap:5px;align-items:center;height:44px}
+.voice-bars i{width:6px;border-radius:99px;background:var(--red);animation:vb 1s ease-in-out infinite}
+.voice-bars i:nth-child(2){animation-delay:.1s}.voice-bars i:nth-child(3){animation-delay:.2s}.voice-bars i:nth-child(4){animation-delay:.3s}.voice-bars i:nth-child(5){animation-delay:.4s}.voice-bars i:nth-child(6){animation-delay:.5s}.voice-bars i:nth-child(7){animation-delay:.6s}
+@keyframes vb{0%,100%{height:12px}50%{height:40px}}
+@media(max-width:880px){.mode-panel{grid-template-columns:1fr;padding:28px 22px;gap:26px}}
 
 /* showcase */
 .show{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:12px}
@@ -113,7 +162,17 @@ h2{font-family:var(--serif);font-weight:700;font-size:clamp(30px,4vw,42px);line-
 .show li .tick{flex:none;width:24px;height:24px;border-radius:999px;background:rgba(62,155,110,.14);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-top:1px}
 .show.reverse .show-img{order:2}
 .premium-badge{display:inline-flex;align-items:center;gap:6px;background:var(--red);color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.4px;padding:5px 13px;border-radius:999px;margin-bottom:14px}
+.free-badge{display:inline-flex;align-items:center;gap:6px;background:var(--green);color:#fff;font-size:11.5px;font-weight:800;letter-spacing:.4px;padding:5px 13px;border-radius:999px;margin-bottom:14px}
 @media(max-width:900px){.show{grid-template-columns:1fr;gap:60px}.fc1{left:6px}.fc3{left:10px}.fc2{right:6px}.show.reverse .show-img{order:0}}
+
+/* barcode showcase visual */
+.super-card{background:var(--card);border-radius:24px;box-shadow:var(--shadow-hero);padding:34px;display:flex;flex-direction:column;gap:20px;align-items:center}
+.super-card .barcode-lines{width:min(260px,70%);height:104px}
+.super-card .scan-result{width:100%;background:#fff;border:1px solid var(--line-2);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow-card);animation:rise .5s .4s ease both}
+.super-card .scan-result b{font-size:15px}
+.super-card .scan-result .macros{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;font-size:12px;font-weight:800}
+.super-card .scan-result .macros span{border-radius:999px;padding:3px 10px}
+.super-tag{font-size:12px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:var(--green)}
 
 /* features grid */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
@@ -122,6 +181,7 @@ h2{font-family:var(--serif);font-weight:700;font-size:clamp(30px,4vw,42px);line-
 .feat .ic{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
 .feat h3{font-family:var(--serif);font-size:19px;font-weight:700;margin-bottom:7px}
 .feat p{font-size:14px;color:var(--ink-soft);font-weight:500}
+.feat .chip-prem{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.4px;color:var(--red);background:rgba(197,58,40,.09);border-radius:999px;padding:2px 9px;margin-left:7px;vertical-align:2px}
 @media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.grid{grid-template-columns:1fr}}
 
@@ -163,7 +223,18 @@ h2{font-family:var(--serif);font-weight:700;font-size:clamp(30px,4vw,42px);line-
 .price-card .per{font-size:13px;color:var(--ink-soft);font-weight:600;margin-bottom:20px}
 .price-card .save{display:inline-block;background:rgba(62,155,110,.14);color:var(--green);font-size:11.5px;font-weight:800;padding:3px 10px;border-radius:999px;margin-left:8px}
 .price-card .btn{margin-top:auto}
+.price-card .trial-note{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin-top:12px;text-align:center}
 @media(max-width:820px){.pricing-cta{grid-template-columns:1fr}}
+
+/* FAQ */
+.faq{max-width:760px;margin:44px auto 0;display:flex;flex-direction:column;gap:12px}
+.faq details{background:var(--card);border-radius:16px;box-shadow:var(--shadow-card);padding:0;overflow:hidden}
+.faq summary{list-style:none;cursor:pointer;padding:18px 22px;font-size:15.5px;font-weight:700;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:22px;font-weight:600;color:var(--terracotta);transition:transform .2s ease;flex:none}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .a{padding:0 22px 20px;font-size:14.5px;color:var(--ink-soft);font-weight:500;max-width:60em}
+.faq .a a{color:var(--red);font-weight:700}
 
 /* final cta */
 .cta-band{background:linear-gradient(135deg,var(--red) 0%,var(--red-deep) 100%);border-radius:28px;padding:64px 48px;text-align:center;color:#fff;box-shadow:var(--shadow-hero);position:relative;overflow:hidden}
@@ -173,6 +244,14 @@ h2{font-family:var(--serif);font-weight:700;font-size:clamp(30px,4vw,42px);line-
 .btn-cream:hover{background:#fff}
 .cta-band .mini{margin-top:18px;font-size:13px;opacity:.75;font-weight:600}
 
+/* sticky mobile CTA */
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(252,248,239,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line-2);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:none;align-items:center;gap:12px;transform:translateY(110%);transition:transform .3s ease}
+.sticky-cta.visible{transform:translateY(0)}
+.sticky-cta .t{font-size:13px;font-weight:700;line-height:1.3}
+.sticky-cta .t small{display:block;font-weight:600;color:var(--ink-soft);font-size:11.5px}
+.sticky-cta .btn{margin-left:auto;flex:none}
+@media(max-width:720px){.sticky-cta{display:flex}}
+
 /* footer */
 footer{padding:56px 0 44px;color:var(--ink-soft);font-size:14px}
 .foot-in{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
@@ -181,6 +260,7 @@ footer{padding:56px 0 44px;color:var(--ink-soft);font-size:14px}
 .foot-links{display:flex;gap:22px;margin-left:auto;font-weight:600;flex-wrap:wrap}
 .foot-links a:hover{color:var(--ink)}
 .foot-legal{margin-top:22px;font-size:12.5px;color:var(--ink-mute);max-width:52em}
+@media(max-width:720px){footer{padding-bottom:110px}}
 </style>
 </head>
 <body>
@@ -190,11 +270,11 @@ footer{padding:56px 0 44px;color:var(--ink-soft);font-size:14px}
     <a class="brand" href="/macro/"><img src="/macro/assets/icon-180.png" alt="Macro">Macro</a>
     <div class="nav-links">
       <a href="#como">Cómo funciona</a>
+      <a href="#registro">Formas de registrar</a>
       <a href="#funciones">Funciones</a>
-      <a href="#equipo">Tu equipo</a>
-      <a href="#premium">Premium</a>
+      <a href="#premium">Precios</a>
     </div>
-    <a class="btn btn-red btn-sm" href="https://apps.apple.com/mx/app/macros/id6782473761">Probar gratis</a>
+    <a class="btn btn-red btn-sm" href="https://apps.apple.com/mx/app/macros/id6782473761">Descargar gratis</a>
   </div>
 </nav>
 
@@ -202,7 +282,6 @@ footer{padding:56px 0 44px;color:var(--ink-soft);font-size:14px}
 <svg class="picado" viewBox="0 0 1200 34" preserveAspectRatio="none" aria-hidden="true">
   <line x1="0" y1="1" x2="1200" y2="1" stroke="#DCCFB4" stroke-width="2"/>
   <g>
-    <!-- weave: red · green · amber · teal · azul -->
     <path d="M10 2h44v20l-6 5 6 5-8-2-6 4-8-4-8 4-6-4-8 2 6-5-6-5z" fill="#C53A28"/>
     <path d="M130 2h44v20l-6 5 6 5-8-2-6 4-8-4-8 4-6-4-8 2 6-5-6-5z" fill="#3E9B6E"/>
     <path d="M250 2h44v20l-6 5 6 5-8-2-6 4-8-4-8 4-6-4-8 2 6-5-6-5z" fill="#D08A2A"/>
@@ -224,12 +303,18 @@ footer{padding:56px 0 44px;color:var(--ink-soft);font-size:14px}
     <div>
       <span class="eyebrow">🌮 Hecho para la comida real</span>
       <h1>Una foto.<br><em>Tus macros.</em></h1>
-      <p class="lead">Macro es el diario de nutrición hecho para tacos, bowls, antojitos y comida casera — todo lo que no cabe en una etiqueta perfecta. Toma una foto de tu plato y conoce sus calorías, proteína, carbohidratos y grasas.</p>
+      <p class="lead">Deja de buscar "tacos" en listas gringas que no conocen tu comida. Fotografía tu plato, escanea el producto o dilo con tu voz — Macro te da calorías, proteína, carbohidratos y grasas en segundos, con porciones que tú controlas.</p>
       <div class="hero-ctas">
         <a class="btn btn-red" href="https://apps.apple.com/mx/app/macros/id6782473761">Descárgala en el App Store</a>
         <a class="btn btn-outline" href="#como">Ver cómo funciona</a>
       </div>
-      <p class="hero-note"><b>Gratis para empezar</b> · Español e inglés · Ya disponible en el App Store</p>
+      <div class="mode-strip" aria-label="Cuatro formas de registrar">
+        <span class="mode-pill"><span class="em">📷</span>Foto</span>
+        <span class="mode-pill"><span class="em">▮▮▮</span>Código de barras <span class="tagg">GRATIS ∞</span></span>
+        <span class="mode-pill"><span class="em">🎙️</span>Voz</span>
+        <span class="mode-pill"><span class="em">⌨️</span>Texto</span>
+      </div>
+      <p class="hero-note"><b>Gratis para empezar, sin tarjeta</b> · Español e inglés · Ya en el App Store</p>
     </div>
     <div class="phone-col">
       <div class="phone" role="img" aria-label="Captura de pantalla real del tablero de Macro con el progreso de macros del día">
@@ -241,19 +326,28 @@ footer{padding:56px 0 44px;color:var(--ink-soft);font-size:14px}
   </div>
 </header>
 
+<div class="trust">
+  <div class="wrap">
+    <span><span class="em">🇲🇽</span>Entrenado con platillos mexicanos</span>
+    <span><span class="em">🔎</span>Estimaciones con fuentes científicas citadas</span>
+    <span><span class="em">🔒</span>Tu diario es tuyo — sin anuncios, sin vender tus datos</span>
+    <span><span class="em">🗣️</span>100% en español (y en inglés si quieres)</span>
+  </div>
+</div>
+
 <section id="como">
   <div class="wrap">
     <div class="sec-eyebrow">Cómo funciona</div>
     <h2>Menos hoja de cálculo, más comer con intención</h2>
-    <p class="sec-lead">Registrar una comida toma segundos, no minutos. Sin buscar en listas interminables ni adivinar porciones genéricas.</p>
+    <p class="sec-lead">Las apps de conteo mueren por fricción: buscar, medir, adivinar, abandonar. Macro reduce cada registro a segundos para que el hábito sí sobreviva a la semana dos.</p>
     <div class="steps">
       <div class="step">
         <span class="num">1</span>
         <div class="ic" style="background:rgba(197,58,40,.12)">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C53A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
         </div>
-        <h3>Toma una foto</h3>
-        <p>Apunta la cámara a tu plato. Macro reconoce el platillo — está entrenado para comidas completas, porciones variables y platillos mexicanos que otras apps tratan como genéricos.</p>
+        <h3>Captúralo como sea</h3>
+        <p>Foto del plato, código de barras del producto, tu voz o texto. Cuatro caminos, el que te quede más cerca en ese momento.</p>
       </div>
       <div class="step">
         <span class="num">2</span>
@@ -261,15 +355,103 @@ footer{padding:56px 0 44px;color:var(--ink-soft);font-size:14px}
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#D08A2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
         <h3>Confirma y ajusta</h3>
-        <p>Revisa los ingredientes detectados, ajusta la porción con un toque y confirma. Tú siempre tienes la última palabra sobre tu plato.</p>
+        <p>Revisa el desglose por ingrediente, ajusta la porción con un toque — piezas, tazas o gramos — y confirma. Tú tienes la última palabra.</p>
       </div>
       <div class="step">
         <span class="num">3</span>
         <div class="ic" style="background:rgba(62,155,110,.14)">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#3E9B6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
         </div>
-        <h3>Mira tu progreso</h3>
-        <p>Calorías, proteína, grasa y carbohidratos del día, junto a tus metas personales. Historial, racha, agua y consejos que sí te ayudan a decidir.</p>
+        <h3>Decide con datos</h3>
+        <p>Tu avance del día contra tus metas, siempre a la vista. Antes de pedir, Macro te dice si ese platillo cabe en lo que te queda del día.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="registro" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-eyebrow">Cuatro formas de registrar</div>
+    <h2>El camino más corto entre tu plato y tus números</h2>
+    <p class="sec-lead">Cada comida es distinta: a veces es un guisado casero, a veces un yogurt del súper, a veces vas manejando. Macro tiene un modo para cada momento.</p>
+
+    <div class="modes-box">
+      <div class="modes-tabs" role="tablist" aria-label="Formas de registrar">
+        <button role="tab" id="tab-foto" aria-controls="panel-foto" aria-selected="true"><span class="em">📷</span>Foto</button>
+        <button role="tab" id="tab-barcode" aria-controls="panel-barcode" aria-selected="false"><span class="em">▮▮▮</span>Código de barras</button>
+        <button role="tab" id="tab-voz" aria-controls="panel-voz" aria-selected="false"><span class="em">🎙️</span>Voz</button>
+        <button role="tab" id="tab-texto" aria-controls="panel-texto" aria-selected="false"><span class="em">⌨️</span>Texto</button>
+      </div>
+
+      <div class="mode-panel active" id="panel-foto" role="tabpanel" aria-labelledby="tab-foto">
+        <div>
+          <span class="kicker free">Gratis · 3 fotos al día</span>
+          <h3>Para el plato sin etiqueta</h3>
+          <p>Comida casera, fonda, la carnita asada del domingo. Apunta la cámara y Macro reconoce el platillo completo — está entrenado con comida mexicana que otras apps tratan como "burrito genérico".</p>
+          <ul class="mini-list">
+            <li><span class="tick">✓</span>Desglose por ingrediente, editable</li>
+            <li><span class="tick">✓</span>Porciones en piezas, tazas o gramos</li>
+            <li><span class="tick">✓</span>Ilimitado con Premium</li>
+          </ul>
+        </div>
+        <div class="mode-visual" aria-hidden="true">
+          <div class="demo-chip user">📷 <em>foto de chilaquiles verdes…</em></div>
+          <div class="demo-chip"><b>Chilaquiles verdes con pollo</b></div>
+          <div class="demo-chip"><div class="macros"><span style="background:rgba(191,96,48,.14);color:#BF6030">520 kcal</span><span style="background:rgba(197,58,40,.12);color:#C53A28">P 34g</span><span style="background:rgba(44,124,114,.14);color:#2C7C72">C 42g</span><span style="background:rgba(208,138,42,.16);color:#9A6212">G 18g</span></div></div>
+        </div>
+      </div>
+
+      <div class="mode-panel" id="panel-barcode" role="tabpanel" aria-labelledby="tab-barcode" hidden>
+        <div>
+          <span class="kicker free">Gratis · escaneos ilimitados</span>
+          <h3>Para todo lo que tiene código</h3>
+          <p>Del yogurt al pan de caja: apunta al código de barras y en dos segundos tienes el producto con sus datos nutrimentales. ¿No hay código legible? Fotografía la etiqueta nutrimental y Macro la lee por ti.</p>
+          <ul class="mini-list">
+            <li><span class="tick">✓</span>Detección automática — ni siquiera hay botón que apretar</li>
+            <li><span class="tick">✓</span>Lee también etiquetas nutrimentales por foto</li>
+            <li><span class="tick">✓</span>Gratis e ilimitado, para siempre</li>
+          </ul>
+        </div>
+        <div class="mode-visual barcode-demo" aria-hidden="true">
+          <div class="barcode-lines"></div>
+          <div class="demo-chip"><b>Yogurt griego natural</b>&nbsp;· 90 kcal · P 15g</div>
+        </div>
+      </div>
+
+      <div class="mode-panel" id="panel-voz" role="tabpanel" aria-labelledby="tab-voz" hidden>
+        <div>
+          <span class="kicker prem">Premium</span>
+          <h3>Para cuando traes las manos ocupadas</h3>
+          <p>"Dos tacos de bistec con todo y un agua de horchata." Dilo y ya está: Macro entiende platillos múltiples en una sola frase y calcula cada uno por separado.</p>
+          <ul class="mini-list">
+            <li><span class="tick">✓</span>Varios platillos en una sola frase</li>
+            <li><span class="tick">✓</span>Entiende español como se habla, no como se escribe</li>
+            <li><span class="tick">✓</span>Perfecto para el coche, la caminata o la prisa</li>
+          </ul>
+        </div>
+        <div class="mode-visual" style="align-items:center" aria-hidden="true">
+          <div class="voice-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="demo-chip user">"dos tacos de bistec y una horchata"</div>
+          <div class="demo-chip"><b>2 registros</b>&nbsp;· 610 kcal en total</div>
+        </div>
+      </div>
+
+      <div class="mode-panel" id="panel-texto" role="tabpanel" aria-labelledby="tab-texto" hidden>
+        <div>
+          <span class="kicker free">Gratis · ~20 al día</span>
+          <h3>Para lo que ya te sabes de memoria</h3>
+          <p>Escribe "3 huevos revueltos con jamón" y listo. Sin listas interminables ni resultados en inglés: la búsqueda entiende cantidades, preparaciones y nombres como tú los dices.</p>
+          <ul class="mini-list">
+            <li><span class="tick">✓</span>Cantidades y porciones dentro de la frase</li>
+            <li><span class="tick">✓</span>Tus platillos frecuentes se registran en un toque</li>
+            <li><span class="tick">✓</span>Ilimitado con Premium</li>
+          </ul>
+        </div>
+        <div class="mode-visual" aria-hidden="true">
+          <div class="demo-chip user">3 huevos revueltos con jamón</div>
+          <div class="demo-chip"><b>Huevos revueltos con jamón</b>&nbsp;× 3</div>
+          <div class="demo-chip"><div class="macros"><span style="background:rgba(191,96,48,.14);color:#BF6030">310 kcal</span><span style="background:rgba(197,58,40,.12);color:#C53A28">P 25g</span></div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -287,13 +469,60 @@ footer{padding:56px 0 44px;color:var(--ink-soft);font-size:14px}
     <div>
       <div class="sec-eyebrow">Foto a macros</div>
       <h2>Diseñado para el plato que tienes enfrente</h2>
-      <p class="sec-lead">No todo viene con código de barras. Macro estima los macros de comida casera, de restaurante y de la calle para que decidas mejor sin convertir cada comida en una tarea.</p>
+      <p class="sec-lead">La mayoría de lo que comes no trae etiqueta. Macro estima los macros de comida casera, de fonda y de la calle con un desglose honesto: si un ingrediente no se pudo identificar, te lo dice en lugar de inventar un número.</p>
       <ul>
         <li><span class="tick">✓</span>Desglose claro por ingrediente, con porciones que puedes ajustar</li>
-        <li><span class="tick">✓</span>Registra también por texto, voz o escaneando un código de barras</li>
+        <li><span class="tick">✓</span>Corrige el nombre o los ingredientes y los números se recalculan</li>
         <li><span class="tick">✓</span>Guarda tus platillos frecuentes y regístralos en un toque</li>
         <li><span class="tick">✓</span>Todo en español e inglés, como tú hables</li>
       </ul>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap show reverse">
+    <div class="show-img" style="box-shadow:none">
+      <div class="super-card">
+        <span class="super-tag">Gratis · ilimitado · sin botones</span>
+        <div class="barcode-lines" role="img" aria-label="Código de barras siendo escaneado"></div>
+        <div class="scan-result">
+          <b>Leche entera 1L</b>
+          <div class="macros"><span style="background:rgba(191,96,48,.14);color:#BF6030">61 kcal/100ml</span><span style="background:rgba(197,58,40,.12);color:#C53A28">P 3.1g</span><span style="background:rgba(208,138,42,.16);color:#9A6212">G 3.4g</span></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="free-badge">✓ GRATIS E ILIMITADO</span>
+      <h2>El súper, resuelto en dos segundos</h2>
+      <p class="sec-lead">Abre la cámara y apunta: el escáner detecta el código de barras solo, sin apretar nada, y te trae el producto con sus datos nutrimentales. Es la forma más rápida de registrar todo lo empacado — y no te cuesta ni un peso, ni hoy ni nunca.</p>
+      <ul style="margin-top:26px;display:flex;flex-direction:column;gap:16px;list-style:none">
+        <li style="display:flex;gap:13px;font-size:15.5px;font-weight:500"><span class="tick" style="flex:none;width:24px;height:24px;border-radius:999px;background:rgba(62,155,110,.14);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-top:1px">✓</span>Detección automática mientras encuadras — cero fricción</li>
+        <li style="display:flex;gap:13px;font-size:15.5px;font-weight:500"><span class="tick" style="flex:none;width:24px;height:24px;border-radius:999px;background:rgba(62,155,110,.14);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-top:1px">✓</span>¿Código dañado o producto a granel? Fotografía la etiqueta nutrimental y Macro la lee</li>
+        <li style="display:flex;gap:13px;font-size:15.5px;font-weight:500"><span class="tick" style="flex:none;width:24px;height:24px;border-radius:999px;background:rgba(62,155,110,.14);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-top:1px">✓</span>Ajusta la porción que realmente te serviste, no la del empaque</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap show">
+    <div class="show-img">
+      <img src="/macro/assets/food-pantry.jpg" alt="Alacena con arroz, frijoles, pasta, tortillas y verduras — lista para que Macro sugiera qué cocinar">
+      <div class="float-chip fc1"><span class="dot" style="background:#C53A28"></span>Arroz con pollo</div>
+      <div class="float-chip fc2"><span class="dot" style="background:#3E9B6E"></span>Frijoles refritos</div>
+      <div class="float-chip fc4"><span class="dot" style="background:#D08A2A"></span>Sopa de fideo</div>
+    </div>
+    <div>
+      <span class="premium-badge">✦ Premium</span>
+      <h2>¿Qué cocino? Tu alacena tiene la respuesta</h2>
+      <p class="sec-lead">Son las 7pm, no hay plan y no quieres pedir otra vez. Fotografía tu alacena o refri y Macro te sugiere platillos que puedes cocinar hoy con lo que ya tienes — con sus macros calculados de una vez.</p>
+      <ul style="margin-top:26px;display:flex;flex-direction:column;gap:16px;list-style:none">
+        <li style="display:flex;gap:13px;font-size:15.5px;font-weight:500"><span class="tick" style="flex:none;width:24px;height:24px;border-radius:999px;background:rgba(62,155,110,.14);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-top:1px">✓</span>Tu despensa se guarda: agrégale por foto, voz o escaneando códigos</li>
+        <li style="display:flex;gap:13px;font-size:15.5px;font-weight:500"><span class="tick" style="flex:none;width:24px;height:24px;border-radius:999px;background:rgba(62,155,110,.14);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-top:1px">✓</span>Sugerencias que respetan tus metas del día, no recetas de revista</li>
+        <li style="display:flex;gap:13px;font-size:15.5px;font-weight:500"><span class="tick" style="flex:none;width:24px;height:24px;border-radius:999px;background:rgba(62,155,110,.14);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-top:1px">✓</span>Cocinaste → registraste, en el mismo flujo</li>
+      </ul>
+      <p style="margin-top:16px;font-size:13.5px;color:var(--ink-soft);font-weight:600">Gratis: ves los ingredientes reconocidos y una sugerencia. Premium: sugerencias completas e ilimitadas.</p>
     </div>
   </div>
 </section>
@@ -304,34 +533,34 @@ footer{padding:56px 0 44px;color:var(--ink-soft);font-size:14px}
     <h2>Todo tu día de comida, en un solo lugar</h2>
     <div class="grid">
       <div class="feat">
-        <div class="ic" style="background:rgba(197,58,40,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C53A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-        <h3>Foto a macros</h3>
-        <p>Apunta, confirma y listo. Un desglose claro de calorías y macros para comidas completas, no genéricas.</p>
-      </div>
-      <div class="feat">
-        <div class="ic" style="background:rgba(44,124,114,.13)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2C7C72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-        <h3>Registro sin fricción</h3>
-        <p>Cada comida con su foto, tipo y datos nutricionales. Tu avance del día siempre a la vista.</p>
-      </div>
-      <div class="feat">
         <div class="ic" style="background:rgba(62,155,110,.14)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3E9B6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-        <h3>Metas personalizadas</h3>
-        <p>Tu perfil, objetivo y actividad definen metas que se ajustan a tu rutina — no al revés.</p>
+        <h3>Metas que son tuyas</h3>
+        <p>Tu edad, peso, actividad y objetivo definen tus números — bajar, mantener o subir. Nada de metas genéricas de 2,000 kcal para todo el mundo.</p>
+      </div>
+      <div class="feat">
+        <div class="ic" style="background:rgba(197,58,40,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C53A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h3>"¿Me cabe este platillo?"</h3>
+        <p>Antes de pedir, Macro te dice si un platillo cabe en las calorías Y los macros que te quedan hoy. Decides antes, no te arrepientes después.</p>
       </div>
       <div class="feat">
         <div class="ic" style="background:rgba(208,138,42,.14)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D08A2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-        <h3>Planea antes de comer</h3>
-        <p>Explora platillos y revisa cómo encajan en tus macros antes de registrarlos. Menos adivinanzas, más intención.</p>
+        <h3>Plan semanal + lista de súper<span class="chip-prem">Premium</span></h3>
+        <p>Un plan de comidas para tu semana según tus metas y gustos, con la lista de súper armada. Llegas al lunes ya resuelto.</p>
       </div>
       <div class="feat">
-        <div class="ic" style="background:rgba(47,111,158,.13)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2F6F9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5v14"/><path d="M8 5v14"/><path d="M12 5v14"/><path d="M17 5v14"/><path d="M21 5v14"/></svg></div>
-        <h3>Escáner de productos</h3>
-        <p>¿Algo empacado? Escanea el código de barras o la etiqueta nutricional y regístralo con contexto.</p>
+        <div class="ic" style="background:rgba(47,111,158,.13)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2F6F9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h3>Nutriólogo con IA<span class="chip-prem">Premium</span></h3>
+        <p>Pregúntale lo que le preguntarías a un nutriólogo, con tu historial real como contexto. Gratis incluye un consejo diario.</p>
       </div>
       <div class="feat">
         <div class="ic" style="background:rgba(191,96,48,.14)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#BF6030" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
-        <h3>Historial, racha y consejos</h3>
-        <p>Consulta tu historial, mantén tu racha, registra agua y recibe consejos basados en tu progreso real.</p>
+        <h3>Racha, agua e historial</h3>
+        <p>Tu racha de días registrando, tu agua del día y tu historial con tendencias. Los hábitos se construyen viéndolos.</p>
+      </div>
+      <div class="feat">
+        <div class="ic" style="background:rgba(44,124,114,.13)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2C7C72" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        <h3>Corrígelo y aprende</h3>
+        <p>¿La IA le atinó al 90%? Corrige el nombre o un ingrediente y los números se recalculan al instante. Tu diario refleja lo que comiste, no lo que adivinó una máquina.</p>
       </div>
     </div>
   </div>
@@ -362,33 +591,11 @@ footer{padding:56px 0 44px;color:var(--ink-soft);font-size:14px}
   </div>
 </section>
 
-<section>
-  <div class="wrap show reverse">
-    <div class="show-img">
-      <img src="/macro/assets/food-pantry.jpg" alt="Alacena con arroz, frijoles, pasta, tortillas y verduras — lista para que Macro sugiera qué cocinar">
-      <div class="float-chip fc1"><span class="dot" style="background:#C53A28"></span>Arroz con pollo</div>
-      <div class="float-chip fc2"><span class="dot" style="background:#3E9B6E"></span>Frijoles refritos</div>
-      <div class="float-chip fc4"><span class="dot" style="background:#D08A2A"></span>Sopa de fideo</div>
-    </div>
-    <div>
-      <span class="premium-badge">✦ Premium</span>
-      <h2>¿Qué cocino? Fotografía tu alacena o refri</h2>
-      <p class="sec-lead">Sin plan, sin antojo claro y sin ganas de salir a comprar. Toma una foto de lo que ya tienes en casa y Macro te sugiere platillos que puedes cocinar hoy, con sus macros calculados de una vez.</p>
-      <ul style="margin-top:26px;display:flex;flex-direction:column;gap:16px;list-style:none">
-        <li style="display:flex;gap:13px;font-size:15.5px;font-weight:500"><span class="tick" style="flex:none;width:24px;height:24px;border-radius:999px;background:rgba(62,155,110,.14);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-top:1px">✓</span>Reconoce ingredientes por foto, texto o voz</li>
-        <li style="display:flex;gap:13px;font-size:15.5px;font-weight:500"><span class="tick" style="flex:none;width:24px;height:24px;border-radius:999px;background:rgba(62,155,110,.14);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-top:1px">✓</span>Sugiere platillos que ya sabes cocinar en casa</li>
-        <li style="display:flex;gap:13px;font-size:15.5px;font-weight:500"><span class="tick" style="flex:none;width:24px;height:24px;border-radius:999px;background:rgba(62,155,110,.14);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-top:1px">✓</span>Macros calculados automáticamente al registrar</li>
-      </ul>
-      <p style="margin-top:16px;font-size:13.5px;color:var(--ink-soft);font-weight:600">Gratis: ves los ingredientes reconocidos y una sugerencia. Premium: sugerencias completas e ilimitadas.</p>
-    </div>
-  </div>
-</section>
-
 <section id="premium">
   <div class="wrap">
-    <div class="sec-eyebrow">Premium</div>
+    <div class="sec-eyebrow">Precios</div>
     <h2>Gratis para siempre. Premium para ir más a fondo.</h2>
-    <p class="sec-lead">Todo lo esencial para registrar tu comida es gratis, sin límite de tiempo. Premium quita los topes diarios y suma un nutriólogo con IA, planeación semanal y el modo "¿Qué cocino?" completo.</p>
+    <p class="sec-lead">Todo lo esencial para registrar tu comida es gratis, sin límite de tiempo y sin tarjeta. Premium quita los topes diarios y suma voz, nutriólogo con IA, plan semanal y el modo "¿Qué cocino?" completo.</p>
 
     <div class="compare-wrap">
       <div class="compare">
@@ -396,6 +603,11 @@ footer{padding:56px 0 44px;color:var(--ink-soft);font-size:14px}
           <div class="cell feat">Función</div>
           <div class="cell free-col">Gratis</div>
           <div class="cell prem-col">Premium</div>
+        </div>
+        <div class="compare-row">
+          <div class="cell feat">Escáner de código de barras + etiquetas</div>
+          <div class="cell free-col"><span class="yes">✓</span> Ilimitado</div>
+          <div class="cell prem-col"><span class="yes">✓</span> Ilimitado</div>
         </div>
         <div class="compare-row">
           <div class="cell feat">Registro por foto (IA)</div>
@@ -408,17 +620,12 @@ footer{padding:56px 0 44px;color:var(--ink-soft);font-size:14px}
           <div class="cell prem-col">Ilimitado</div>
         </div>
         <div class="compare-row">
-          <div class="cell feat">Escáner de código de barras</div>
-          <div class="cell free-col"><span class="yes">✓</span> Ilimitado</div>
-          <div class="cell prem-col"><span class="yes">✓</span> Ilimitado</div>
-        </div>
-        <div class="compare-row">
           <div class="cell feat">Registro por voz</div>
           <div class="cell free-col"><span class="no-mark">—</span></div>
           <div class="cell prem-col"><span class="yes">✓</span></div>
         </div>
         <div class="compare-row">
-          <div class="cell feat">Metas personalizadas</div>
+          <div class="cell feat">Metas personalizadas y "¿me cabe?"</div>
           <div class="cell free-col"><span class="yes">✓</span></div>
           <div class="cell prem-col"><span class="yes">✓</span></div>
         </div>
@@ -438,12 +645,12 @@ footer{padding:56px 0 44px;color:var(--ink-soft);font-size:14px}
           <div class="cell prem-col">Completo + tendencias</div>
         </div>
         <div class="compare-row">
-          <div class="cell feat">¿Qué cocino? (alacena → recetas)</div>
+          <div class="cell feat">¿Qué cocino? (alacena → platillos)</div>
           <div class="cell free-col">Vista previa</div>
           <div class="cell prem-col">Completo</div>
         </div>
         <div class="compare-row">
-          <div class="cell feat">Plan semanal de comidas con IA</div>
+          <div class="cell feat">Plan semanal + lista de súper</div>
           <div class="cell free-col"><span class="no-mark">—</span></div>
           <div class="cell prem-col"><span class="yes">✓</span></div>
         </div>
@@ -465,46 +672,66 @@ footer{padding:56px 0 44px;color:var(--ink-soft);font-size:14px}
       </div>
       <div class="price-card hot">
         <h3>Premium</h3>
-        <div class="tagline">Sin topes diarios, con nutriólogo IA y planeación completa.</div>
+        <div class="tagline">Sin topes diarios, con voz, nutriólogo IA y planeación completa.</div>
         <div class="toggle" role="group" aria-label="Elegir facturación">
           <button type="button" id="toggle-annual" class="active" onclick="setBilling('annual')">Anual</button>
           <button type="button" id="toggle-monthly" onclick="setBilling('monthly')">Mensual</button>
         </div>
         <div id="price-annual">
-          <div class="price">$999 <small>MXN</small><span class="save">Ahorra 16%</span></div>
-          <div class="per">al año — equivale a $83/mes</div>
+          <div class="price">$599 <small>MXN</small><span class="save">Ahorra 50%</span></div>
+          <div class="per">al año — sale en $50 al mes</div>
         </div>
         <div id="price-monthly" style="display:none">
           <div class="price">$99 <small>MXN</small></div>
           <div class="per">al mes — cancela cuando quieras</div>
         </div>
         <a class="btn btn-red" href="https://apps.apple.com/mx/app/macros/id6782473761">Probar 7 días gratis</a>
+        <p class="trial-note">7 días de prueba · te avisamos antes del cobro · cancela en un toque</p>
       </div>
     </div>
   </div>
 </section>
 
-<script>
-function setBilling(plan){
-  var annualBtn = document.getElementById('toggle-annual');
-  var monthlyBtn = document.getElementById('toggle-monthly');
-  var annualPrice = document.getElementById('price-annual');
-  var monthlyPrice = document.getElementById('price-monthly');
-  var isAnnual = plan === 'annual';
-  annualBtn.classList.toggle('active', isAnnual);
-  monthlyBtn.classList.toggle('active', !isAnnual);
-  annualPrice.style.display = isAnnual ? '' : 'none';
-  monthlyPrice.style.display = isAnnual ? 'none' : '';
-}
-</script>
+<section style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-eyebrow" style="text-align:center">Preguntas frecuentes</div>
+    <h2 style="margin:0 auto;text-align:center">Lo que seguro te estás preguntando</h2>
+    <div class="faq">
+      <details>
+        <summary>¿Qué tan precisas son las estimaciones por foto?</summary>
+        <div class="a">Son estimaciones honestas, no básculas mágicas: Macro identifica el platillo y sus ingredientes, calcula con datos nutricionales de fuentes públicas citadas dentro de la app, y te muestra el desglose para que ajustes porciones. Si algo no se pudo identificar, te lo dice en vez de inventar un número. Para productos empacados, el escáner de código de barras usa los datos del empaque — ahí la precisión es la de la etiqueta.</div>
+      </details>
+      <details>
+        <summary>¿De verdad puedo usarla gratis para siempre?</summary>
+        <div class="a">Sí. El plan gratis no caduca y no pide tarjeta: incluye escáner de código de barras ilimitado, 3 fotos con IA al día, ~20 registros por texto, metas personalizadas, racha, agua y tu diario de los últimos 7 días. Premium existe para quien quiere quitar topes y sumar coaching — no para desbloquear lo básico.</div>
+      </details>
+      <details>
+        <summary>¿Qué pasa con mis datos?</summary>
+        <div class="a">Tu diario es tuyo. No vendemos tus datos ni mostramos anuncios; borras tu cuenta y tus datos cuando quieras, directo desde la app. Los detalles completos están en nuestro <a href="/privacy/">aviso de privacidad</a>.</div>
+      </details>
+      <details>
+        <summary>¿Funciona con comida que no es mexicana?</summary>
+        <div class="a">Claro — reconoce comida de todo tipo. La diferencia es que la comida mexicana no es una ocurrencia tardía: los chilaquiles, el pozole y los tacos al pastor reciben el mismo cuidado que un bowl de quinoa. Y toda la app funciona igual de bien en español que en inglés.</div>
+      </details>
+      <details>
+        <summary>¿Cómo cancelo Premium?</summary>
+        <div class="a">Desde los ajustes de tu Apple ID, en un toque, cuando quieras. La prueba dura 7 días y te avisamos antes de cualquier cobro; si cancelas durante la prueba, no pagas nada.</div>
+      </details>
+      <details>
+        <summary>¿Está para Android?</summary>
+        <div class="a">Por ahora Macro es solo para iPhone (iOS 16 o superior). Android está en nuestros planes — si quieres que te avisemos, escríbenos a <a href="mailto:support@obedstudio.dev">support@obedstudio.dev</a>.</div>
+      </details>
+    </div>
+  </div>
+</section>
 
 <section style="padding-top:20px">
   <div class="wrap">
     <div class="cta-band">
       <h2>Mejores decisiones en cada comida</h2>
-      <p>Descarga Macro hoy y registra tu primera comida en segundos. Gratis para empezar.</p>
+      <p>Descarga Macro gratis y registra tu primera comida en menos de un minuto. Foto, código de barras, voz o texto — tú eliges el camino.</p>
       <a class="btn btn-cream" href="https://apps.apple.com/mx/app/macros/id6782473761">Descárgala en el App Store</a>
-      <div class="mini">Requiere iPhone con iOS 16 o superior · Ya disponible en el App Store</div>
+      <div class="mini">Gratis para empezar · Requiere iPhone con iOS 16 o superior</div>
     </div>
   </div>
 </section>
@@ -523,6 +750,73 @@ function setBilling(plan){
     <p class="foot-legal">© 2026 Obed Studio. Macro no reemplaza el consejo de un profesional de salud. Las estimaciones nutricionales pueden variar según ingredientes, porciones y preparación, pero te dan una base práctica para comer con más conciencia.</p>
   </div>
 </footer>
+
+<div class="sticky-cta" id="stickyCta">
+  <div class="t">Macro — gratis en el App Store<small>Foto · código de barras · voz · texto</small></div>
+  <a class="btn btn-red btn-sm" href="https://apps.apple.com/mx/app/macros/id6782473761">Descargar</a>
+</div>
+
+<script>
+function setBilling(plan){
+  var annualBtn = document.getElementById('toggle-annual');
+  var monthlyBtn = document.getElementById('toggle-monthly');
+  var annualPrice = document.getElementById('price-annual');
+  var monthlyPrice = document.getElementById('price-monthly');
+  var isAnnual = plan === 'annual';
+  annualBtn.classList.toggle('active', isAnnual);
+  monthlyBtn.classList.toggle('active', !isAnnual);
+  annualPrice.style.display = isAnnual ? '' : 'none';
+  monthlyPrice.style.display = isAnnual ? 'none' : '';
+}
+
+/* logging-modes tabs: click/keyboard + gentle auto-rotate until first interaction */
+(function(){
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.modes-tabs [role="tab"]'));
+  var panels = Array.prototype.slice.call(document.querySelectorAll('.mode-panel'));
+  var interacted = false;
+  function activate(i){
+    tabs.forEach(function(t, j){
+      t.setAttribute('aria-selected', i === j ? 'true' : 'false');
+    });
+    panels.forEach(function(p, j){
+      p.classList.toggle('active', i === j);
+      if(i === j){ p.removeAttribute('hidden'); } else { p.setAttribute('hidden', ''); }
+    });
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ interacted = true; activate(i); });
+    t.addEventListener('keydown', function(e){
+      var dir = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if(!dir) return;
+      e.preventDefault();
+      interacted = true;
+      var next = (i + dir + tabs.length) % tabs.length;
+      activate(next);
+      tabs[next].focus();
+    });
+  });
+  var idx = 0;
+  var rotator = setInterval(function(){
+    if(interacted){ clearInterval(rotator); return; }
+    // don't rotate while off-screen
+    var box = document.querySelector('.modes-box');
+    var r = box.getBoundingClientRect();
+    if(r.bottom < 0 || r.top > window.innerHeight) return;
+    idx = (idx + 1) % tabs.length;
+    activate(idx);
+  }, 5000);
+})();
+
+/* sticky mobile CTA: appears after the hero CTA scrolls out of view */
+(function(){
+  var bar = document.getElementById('stickyCta');
+  var hero = document.querySelector('.hero-ctas');
+  if(!bar || !hero || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver(function(entries){
+    bar.classList.toggle('visible', !entries[0].isIntersecting);
+  }, {threshold: 0}).observe(hero);
+})();
+</script>
 
 </body>
 </html>
